@@ -1,7 +1,6 @@
 import requests
 from datetime import datetime
 
-
 class OrdemDeCompra:
     def __init__(self):
         self.url_petstore_order = 'https://petstore.swagger.io/v2/store/order'
@@ -27,4 +26,12 @@ class OrdemDeCompra:
         }
         response = requests.post(self.url_petstore_order, headers=header, json=data)
         self.status_code = response.status_code
+        return response
+
+    def get_consultar_ordem_de_compra(self,id):
+        url = f"{self.url_petstore_order}/{id}"
+        response = requests.get(url)
+        self.status_code = response.status_code
+        if response.status_code == 200:
+            self.response_data = response.json()
         return response
