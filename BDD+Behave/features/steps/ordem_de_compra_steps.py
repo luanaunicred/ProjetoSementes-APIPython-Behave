@@ -1,12 +1,12 @@
 from behave import *
-from impl.ordem_de_compra import OrdemDeCompra
+from features.impl.ordem_de_compra import OrdemDeCompra
 
-@given(u'que o usuário selecionou o animal desejado na petstore')
-def step_impl(context):
+@given(u'que o usuário selecionou o animal com o id correspondente a "{id}" desejado na petstore')
+def step_impl(context,id):  #inclui id
     context.ordem = OrdemDeCompra()
-    context.ordem.id = 1
-    context.ordem.petId = 10
-    context.ordem.quantidade = 1
+    context.ordem.id = id #alterei 1 para id
+    context.ordem.petId = 2
+    context.ordem.quantidade = 10
     context.ordem.post_criar_uma_nova_ordem()
 
 
