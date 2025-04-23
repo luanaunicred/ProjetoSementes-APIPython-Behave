@@ -1,5 +1,5 @@
 from behave import *
-from features.impl.ordem_de_compra import OrdemDeCompra
+from BDD_Behave.features.impl.ordem_de_compra import OrdemDeCompra
 
 @given(u'que o usuário selecionou o animal com o id correspondente a "{id}" desejado na petstore')
 def step_impl(context,id):  #inclui id
