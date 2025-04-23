@@ -1,10 +1,10 @@
 from behave import *
-from features.impl.ordem_de_compra import OrdemDeCompra
+from BDD_Behave.features.impl.ordem_de_compra import OrdemDeCompra
 
 @given(u'que o usuário selecionou o animal com o id correspondente a "{id}" desejado na petstore')
 def step_impl(context,id):  #inclui id
     context.ordem = OrdemDeCompra()
-    context.ordem.id = id #alterei 1 para id
+    context.ordem.id = int(id) #alterei 1 para id
     context.ordem.petId = 2
     context.ordem.quantidade = 10
     context.ordem.post_criar_uma_nova_ordem()
@@ -16,6 +16,9 @@ def step_impl(context):
     assert response.status_code == 200, f"Status code esperado: 200, obtido: {response.status_code}"
 
     data = context.ordem.response_data
+    print(f"Tipo do ID esperado: {type(context.ordem.id)}, valor: {context.ordem.id}")
+    print(f"Tipo do ID obtido: {type(data['id'])}, valor: {data['id']}")
+
     assert data['id'] == context.ordem.id, f"ID esperado: {context.ordem.id}, obtido: {data['id']}"
     assert data['petId'] == context.ordem.petId, f"petId esperado: {context.ordem.petId}, obtido: {data['petId']}"
     assert data['quantity'] == context.ordem.quantidade, f"Quantidade esperada: {context.ordem.quantidade}, obtido: {data['quantity']}"
